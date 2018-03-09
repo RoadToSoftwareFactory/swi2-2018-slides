@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Fullscreen slides with Reveal.js</title>
+
+	<meta name="description" content="A plugin for reveal.js">
+	<meta name="author" content="Asvin Goel">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="../lib/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../lib/reveal.js/css/theme/simple.css" id="theme">
+
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="../lib/reveal.js/lib/css/zenburn.css">
+	<!-- Font awesome -->
+	<!--
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	-->	
+	<link rel="stylesheet" href="../lib/reveal.js-menu/font-awesome-5.0.2/css/fontawesome-all.min.css">
+
+<style>
+	.reveal .slide-number {
+		font-size: 24pt;
+
+		display: block;
+		bottom: 60px;}
+	</style>
+	<!-- Printing and PDF exports -->
+	<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../lib/reveal.js/css/print/pdf.css' : '../lib/reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="../lib/reveal.js/lib/js/html5shiv.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides" >
+			<section>
+				<h1>SWI 2 </h1>
+					<p>&nbsp;</p>
+				<p>
+					<small><a href="https://github.com/lpichler/" >Libor Pichler</a> lpichler@redhat.com</small>
+				 </p>
+				 <p>
+					 <small><a href="https://github.com/romanblanco" >Roman Blanco</a> rblanco@redhat.com</small>
+				</p>
+			</section>
+			<section>
+				<h2>Today agenda</h2>
+				<p>&nbsp;</p>
+				<section data-markdown>
+					<script type="text/template">
+						- what it will about
+						- remind git <!-- .element: class="fragment" data-fragment-index="1" -->
+						- use git on ManageIQ repositories <!-- .element: class="fragment" data-fragment-index="2" -->
+						- use update scripts <!-- .element: class="fragment" data-fragment-index="3" -->
+						- TASK: push to your forks <!-- .element: class="fragment" data-fragment-index="4" -->
+						- run ManageIQ <!-- .element: class="fragment" data-fragment-index="5" -->
+					</script>
+				</section>
+			</section>
+
+			<section>
+			<h2>Organizational Info</h2>
+				<section data-markdown>
+					<script type="text/template">
+						- local disks <!-- .element: class="fragment" data-fragment-index="1" -->
+						- use place what you have today each lesson <!-- .element: class="fragment" data-fragment-index="2" -->
+						- do everything under ~/ctvrtek  <!-- .element: class="fragment" data-fragment-index="3" -->
+						- 10 minutes break at 11:30 ? <!-- .element: class="fragment" data-fragment-index="4" -->
+						- login: swi2
+						- password:manageiq
+					</script>
+				</section>
+			</section>
+
+			<section>
+				<h2>What it will about ?</h2>
+					<div class="paragraph">
+						<section data-markdown>
+						<script type="text/template">
+							- ruby and ruby on rails (code structure)
+							- learn about refactoring
+							- making changes to follow our (good) patterns
+							- ??
+						</script>
+					</section>
+
+					</div>
+					<div class="paragraph">
+						<p>
+							<span class="image"><img src="homer-denial.jpg" width="280"></span>
+
+					</p>
+					</div>
+			</section>
+			<section>
+				<h2>Remind git</h2>
+
+				<div class="paragraph">
+					<section data-markdown>
+						<script type="text/template">
+							- repository, remotes
+							- commits
+							- branches
+							- basic commands add, commit, fetch, push, pull
+							- merge and rebase
+							- conflict solving
+							- git hub workflow, pull request
+						</script>
+					</section>
+
+				</div>
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="homer-pythagoras.png" width="250"></span>
+					</p>
+				</div>
+			</section>
+			<section>
+				<h2>Repository</h2>
+				<section data-markdown>
+				<script type="text/template">
+					- directory under version control
+					- https://github.com/ManageIQ/manageiq-ui-classic
+					- https://github.com/ManageIQ/manageiq
+					- https://github.com/RoadToSoftwareFactory/swi-bin
+					- local or remote in git server (hosted for example on https://github.com/)
+				</script>
+				</section>
+			</section>
+			<section>
+				<h2>Remotes</h2>
+				<section data-markdown>
+				<script type="text/template">
+					- just label for remote repository
+					- origin(my fork), upstream(main repo), whatever(whatever)
+					- list of remotes git remote -v
+					```
+					upstream	https://github.com/ManageIQ/manageiq.git (fetch)
+					upstream	https://github.com/ManageIQ/manageiq.git (push)
+					origin	    https://github.com/lpichler/manageiq.git (fetch)
+					origin    	https://github.com/lpichler/manageiq.git (push)
+					```
+					- add new remote
+					```
+					git remote add upstream https://github.com/ManageIQ/manageiq.git
+					```
+				</script>
+				</section>
+			</section>
+
+			<section>
+				<div class="paragraph">
+					<h2>Commit, branches</h2>
+					<section data-markdown>
+						<script type="text/template">
+							- change
+							- master
+							- create new branch git -b checkout name_of_branch
+						</script>
+					</section>
+				</div>
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="branches_git.png" width="800"></span>
+					</p>
+				</div>
+			</section>
+			<section>
+				<div class="paragraph">
+					<h2>Git add, commit</h2>
+					<section data-markdown>
+						<script type="text/template">
+							- it is done on any branch
+							- git add /my_file
+							- git add .
+							- git commit
+							- git commit -m "description of change"
+						</script>
+					</section>
+				</div>
+
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="AtDEJJwMtdcMMVrQ.png" width="600"></span>
+					</p>
+				</div>
+			</section>
+
+			<section>
+				<div class="paragraph">
+					<h2>Git fetch, push, pull</h2>
+					<section data-markdown>
+						<script type="text/template">
+							- git [command] [remote] [branch]
+							- git fetch upstream master
+							- git pull upstream master
+							- git push origin master
+						</script>
+					</section>
+				</div>
+
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="gitrepos.gif" width="700"></span>
+					</p>
+				</div>
+			</section>
+
+			<section>
+				<h2>Merge and rebase</h2>
+				<div class="paragraph">
+				<section data-markdown>
+				<script type="text/template">
+					- not now
+				</script>
+					</section>
+				</div>
+					<div class="paragraph">
+						<p>
+							<span class="image"><img src="fictioninfluence_poll_homersimpson.jpg" width="500"></span>
+						</p>
+					</div>
+				</section>
+			</section>
+			<section>
+				<h2>Conflict solving</h2>
+				<div class="paragraph">
+				<section data-markdown>
+					<script type="text/template">
+						- not now
+					</script>
+				</section>
+				</div>
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="giphy.gif" width="600" ></span>
+					</p>
+				</div>
+			</section>
+			<section>
+				<h2>GitHub workflow, pull request</h2>
+				<div class="paragraph">
+					<section data-markdown>
+						<script type="text/template">
+							- fork
+						</script>
+					</section>
+				</div>
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="git-github-workflow-1000w.png" width="1000" ></span>
+					</p>
+				</div>
+			</section>
+			<section>
+				<h2>Break ?</h2>
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="espresso.jpg" width="800" ></span>
+					</p>
+				</div>
+			</section>
+			<section>
+				<h2>Let's work!</h2>
+				<section data-markdown>
+				<script type="text/template">
+					- what it will about 	<!-- .element: style="color:gray" -->
+					- remind git <!-- .element: style="color:gray" -->
+					- use git on ManageIQ repositories
+					- use update scripts
+					- TASK: push to your forks
+					- run ManageIQ
+				</script>
+				</section>
+			</section>
+			<section>
+				<h2>Fork ManageIQ repositories</h2>
+				<div class="paragraph">
+				<section data-markdown>
+					<script type="text/template">
+						- https://github.com/ManageIQ/manageiq
+						- https://github.com/ManageIQ/manageiq-ui-classic
+						- go to github a press button fork on both repos
+
+					</script>
+				</section>
+				</div>
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="forking.gif" width="500" ></span>
+					</p>
+				</div>
+			</section>
+			<section>
+				<h2>Clone ManageIQ repositories</h2>
+				<div class="paragraph">
+					<section data-markdown>
+						<script type="text/template">
+							- to your local ~/ctvrtek
+							- git clone https://github.com/RoadToSoftwareFactory/swi-bin
+							- git clone https://github.com/ManageIQ/manageiq
+							- git clone https://github.com/ManageIQ/manageiq-ui-classic
+							- see git remote -v
+							- so you have 3 directories
+							- change utery to ctvrtek in swi-bin (miq-update, miq-run-*..)
+						</script>
+					</section>
+				</div>
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="clones.jpg" width="500" ></span>
+					</p>
+				</div>
+			</section>
+			<section>
+				<h2>Update your PATH</h2>
+				<div class="paragraph">
+					<section data-markdown>
+						<script type="text/template">
+							- edit .bashrc or .bash_profile
+							- modify PATH=$PATH:/Users/liborpichler/ctvrtek/swi-bin
+							- go manageiq dir and test it by git-branch-name
+							- try miq-update
+							- try miq-run :)
+							- have a fun with MIQ
+						</script>
+					</section>
+				</div>
+				<div class="paragraph">
+					<p>
+						<span class="image"><img src="download.jpeg" width="500" ></span>
+					</p>
+				</div>
+			</section>
+
+			<section>
+				<h2>TASK: "create push to your fork" script</h2>
+				<div class="paragraph">
+					<section data-markdown>
+						<script type="text/template">
+							- create in manageiq-update-forks
+							```
+							#!/bin/sh
+							set -e
+							```
+							- chmod +x
+							- update miq-update to run manageiq-update-forks
+							- git push
+							- back up it
+							- send it us on gitter as private message
+						</script>
+					</section>
+				</div>
+			</section>
+			<section>
+				<h2>Have a great day!</h2>
+
+					<p>
+						<span class="image"><img src="ledecka-ride-730x430.png" ></span>
+					</p>
+
+			</section>
+		</div>
+		<div style="position: fixed; right: 60px; bottom: 30px; z-index: 30; font-size: 24px; "><a href="#" onclick="Reveal.prev(); return false;"><i class="fa fa-caret-left"></i></a></div>
+		<div style="position: fixed; right: 30px; bottom: 30px; z-index: 30; font-size: 24px; "><a href="#" onclick="Reveal.next(); return false;"><i class="fa fa-caret-right"></i></a></div>
+	</div>
+
+
+
+	<script src="../lib/reveal.js/lib/js/head.min.js"></script>
+	<script src="../lib/reveal.js/js/reveal.js"></script>
+
+	<script type="application/javascript">
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+				width: 1200,
+				height: 800,
+				mouseWheel: true,
+				previewLinks: true,
+				menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+					themes: false,
+					transitions: false,
+					markers: true,
+					hideMissingTitles: true,
+					keyboard: true,
+					custom: [
+				            { title: 'Plugins', icon: '<i class="fa fa-external-link"></i>', src: 'toc.html' },
+				            { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+				        ]
+				},
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../lib/reveal.js-plugins/fullscreen/fullscreen.js' },
+					{ src: '../lib/reveal.js-menu/menu.js' },
+                    { src: '../lib/reveal.js/plugin/markdown/marked.js'},
+                    { src: '../lib/reveal.js/plugin/markdown/markdown.js'},
+				]
+			});
+            // Shows the slide number using default formatting
+            Reveal.configure({ slideNumber: true });
+
+            // Slide number formatting can be configured using these variables:
+            //  "h.v": 	horizontal . vertical slide number (default)
+            //  "h/v": 	horizontal / vertical slide number
+            //    "c": 	flattened slide number
+            //  "c/t": 	flattened slide number / total slides
+            Reveal.configure({ slideNumber: 'c/t' });
+
+            // Control which views the slide number displays on using the "showSlideNumber" value:
+            //     "all": show on all views (default)
+            // "speaker": only show slide numbers on speaker notes view
+            //   "print": only show slide numbers when printing to PDF
+            Reveal.configure({ showSlideNumber: 'all' });
+
+	</script>
+
+</body>
+</html>
