@@ -146,7 +146,75 @@
           </script>
         </section>
       </section>
-
+      <section>
+        <h2>Task</h2>
+        <section data-markdown>
+          <script type="text/template">
+            - replace old methods by new
+            - how to simulate environment easily ?
+            - why not to use rspec ? <!-- .element: class="fragment" data-fragment-index="1" -->
+          </script>
+        </section>
+      </section>
+      <section>
+        <h2>What we need ?</h2>
+        <section data-markdown>
+          <script type="text/template">
+            - data <!-- .element: class="fragment" data-fragment-index="1" -->
+            - FactoryGirl <!-- .element: class="fragment" data-fragment-index="2" -->
+            - skip to run unwanted code <!-- .element: class="fragment" data-fragment-index="3" -->
+            - allow( ,  <!-- .element: class="fragment" data-fragment-index="4" -->
+          </script>
+        </section>
+      </section>
+      <section>
+        <h2>What you need ?</h2>
+        <section data-markdown>
+          <script type="text/template">
+            - take one from https://docs.google.com/spreadsheets/d/1XKBpIUjgLSzfPlhehj1UcZefVTOtJTz9QNcviQ9Y4Es/edit?ts=5abba99f#gid=0 <!-- .element: class="fragment" data-fragment-index="1" -->
+            - identify your model and find how to create it if there are no created <!-- .element: class="fragment" data-fragment-index="2" -->
+            - ServiceTemplate ,.. <!-- .element: class="fragment" data-fragment-index="3" -->
+            - write basic case will calling related method <!-- .element: class="fragment" data-fragment-index="4" -->
+            - put binding.pry inside and reach the old method <!-- .element: class="fragment" data-fragment-index="5" -->
+            - use faking rspec methods <!-- .element: class="fragment" data-fragment-index="6" -->
+            ```
+            allow(controller).to receive(:checked_or_params).and_return(ServiceTemplate.all.ids)
+            allow(User).to receive(:current_user).and_return(admin_user)
+            controller.instance_variable_set(:@settings, {}) # @settings params in controller
+            controller.instance_variable_set(:@_params, {}) # affects params in controller
+            ```
+            - fake checked_or_params and find_checked_items<!-- .element: class="fragment" data-fragment-index="6" -->
+          </script>
+        </section>
+      </section>
+      <section>
+        <h2>Example</h2>
+        <section data-markdown>
+          <script type="text/template">
+            ```
+            describe '#st_delete' do
+              it '' do
+                login_as admin_user
+                allow(User).to receive(:current_user).and_return(admin_user)
+                allow(controller).to receive(:checked_or_params).and_return(ServiceTemplate.all.ids)
+                allow(controller).to receive(:find_checked_items).and_return(ServiceTemplate.all.ids)
+                controller.send(:st_delete)
+              end
+            end
+            ```
+            ```
+            rspec spec/controllers/catalog_controller_spec.rb:21
+            ```
+          </script>
+        </section>
+      </section>
+      <section>
+        <h2>Demo example</h2>
+        <section data-markdown>
+          <script type="text/template">
+          </script>
+        </section>
+      </section>
       <section>
         <h2>Have a great day!</h2>
       </section>
