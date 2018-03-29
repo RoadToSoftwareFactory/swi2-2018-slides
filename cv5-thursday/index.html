@@ -62,11 +62,12 @@
         <section data-markdown>
           <script type="text/template">
             - update the workspace
-            - rbac
+            - RBAC
             - debugging
             - refactoring
             - obsolete methods
             - new methods
+            - preparing environment for playing
           </script>
         </section>
       </section>
@@ -80,6 +81,7 @@
             - do every changes under `~/ctvrtek`
             - login: swi2
             - password: manageiq
+            - special guest: UX interactive designer <!-- .element: class="fragment" data-fragment-index="1" -->
           </script>
         </section>
       </section>
@@ -117,9 +119,14 @@
         <section data-markdown>
           <script type="text/template">
             - http://pryrepl.org/index.html
-
             - https://blog.bigbinary.com/2017/04/18/binding-irb.html
             - https://asciinema.org/a/97278
+            ```
+            bundler.d/Gemfile.dev.rb # from cv2
+            ```
+            - add gems from https://gist.github.com/romanblanco/3ec6fb231b5487fcf30abc7559bf0c99
+            - `bundle install` (from main ManageIQ directory)
+            - try it from console
           </script>
         </section>
       </section>
